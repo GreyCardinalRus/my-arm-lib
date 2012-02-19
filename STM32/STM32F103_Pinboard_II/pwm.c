@@ -1,7 +1,7 @@
 /*
 
-©2012 NEE
-ОТКАЗ ОТ ЛЮБЫХ ВИДОВ ОТВЕСТВЕННОСТИ
+В©2012 NEE
+РћРўРљРђР— РћРў Р›Р®Р‘Р«РҐ Р’РР”РћР’ РћРўР’Р•РЎРўР’Р•РќРќРћРЎРўР
 USE FREELY
 
 */
@@ -10,7 +10,7 @@ USE FREELY
 #include "stm32f10x_tim.h"
 
 
-// стандартная процедура настройки пинов A06,A07, альтернативный пуш-пулл выход
+// СЃС‚Р°РЅРґР°СЂС‚РЅР°СЏ РїСЂРѕС†РµРґСѓСЂР° РЅР°СЃС‚СЂРѕР№РєРё РїРёРЅРѕРІ A06,A07, Р°Р»СЊС‚РµСЂРЅР°С‚РёРІРЅС‹Р№ РїСѓС€-РїСѓР»Р» РІС‹С…РѕРґ
 void pbii_PWM_GPIO_Configuration(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
@@ -30,8 +30,8 @@ void pbii_PWM_GPIO_Configuration(void)
 
 void pbii_PWM_RCC_Configuration(void)
 {
-  /* TIM3 clock enable */ // разрешить клокирование TIM3 и альтернативного ввода-
-                          // вывода на порт B
+  /* TIM3 clock enable */ // СЂР°Р·СЂРµС€РёС‚СЊ РєР»РѕРєРёСЂРѕРІР°РЅРёРµ TIM3 Рё Р°Р»СЊС‚РµСЂРЅР°С‚РёРІРЅРѕРіРѕ РІРІРѕРґР°-
+                          // РІС‹РІРѕРґР° РЅР° РїРѕСЂС‚ B
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
 
   /* GPIOA and GPIOB clock enable */
@@ -39,7 +39,7 @@ void pbii_PWM_RCC_Configuration(void)
 }
 
 void pbii_PWM_TIM3_Init(void)
-{ // установка начальных значений шима
+{ // СѓСЃС‚Р°РЅРѕРІРєР° РЅР°С‡Р°Р»СЊРЅС‹С… Р·РЅР°С‡РµРЅРёР№ С€РёРјР°
   TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
   TIM_OCInitTypeDef  TIM_OCInitStructure;
   uint16_t CCR1_Val = 333;
@@ -47,14 +47,14 @@ void pbii_PWM_TIM3_Init(void)
   uint16_t PrescalerValue = 0;
 
 
-   // разрешить клокирование ШИМа
+   // СЂР°Р·СЂРµС€РёС‚СЊ РєР»РѕРєРёСЂРѕРІР°РЅРёРµ РЁРРњР°
   /* System Clocks Configuration */
   pbii_PWM_RCC_Configuration();
-  // установить кофигурацию штырей ввода-вывода для ШИМа
+  // СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РєРѕС„РёРіСѓСЂР°С†РёСЋ С€С‚С‹СЂРµР№ РІРІРѕРґР°-РІС‹РІРѕРґР° РґР»СЏ РЁРРњР°
   /* GPIO Configuration */
   pbii_PWM_GPIO_Configuration();
-  // инициализация TIM3 режиме ШИМ целиком выдрана из примеров к стандартной 
-  // библиотеке STM32  используются 2 из 4х каналов ШИМ
+  // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ TIM3 СЂРµР¶РёРјРµ РЁРРњ С†РµР»РёРєРѕРј РІС‹РґСЂР°РЅР° РёР· РїСЂРёРјРµСЂРѕРІ Рє СЃС‚Р°РЅРґР°СЂС‚РЅРѕР№
+  // Р±РёР±Р»РёРѕС‚РµРєРµ STM32  РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ 2 РёР· 4С… РєР°РЅР°Р»РѕРІ РЁРРњ
   /* -----------------------------------------------------------------------
     TIM3 Configuration: generate 4 PWM signals with 4 different duty cycles:
     The TIM3CLK frequency is set to SystemCoreClock (Hz), to get TIM3 counter
