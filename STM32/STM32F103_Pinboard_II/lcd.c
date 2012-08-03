@@ -8,6 +8,19 @@ USE FREELY
 #include "stm32f10x_gpio.h"
 #include "stm32f10x_rcc.h"
 #include "lcd.h"
+#define port            GPIOB
+#define init_port       RCC_APB2Periph_GPIOB
+#define pin_e           GPIO_Pin_12
+#define pin_rw          GPIO_Pin_10
+#define pin_rs          GPIO_Pin_11
+
+#define lcd_shift       6                       //номер последнего бита в 4-битной шине
+#define use_gpio        GPIO_Pin_9  // старший бит                                                      9
+#define pin_d7          use_gpio    // старший бит                                                      9
+#define pin_d6          use_gpio>>1 // следующий по убыванию бит                                           8
+#define pin_d5          use_gpio>>2 // следующий по убыванию бит                                           7
+#define pin_d4          use_gpio>>3 // следующий по убыванию бит (последний бит в 4-х битной шине)         6
+
 // таблица перекодировки CP866 или CP1251 в кодировку индикатора
 // ВНИМАНИЕ! Обеспечивается перекодировка только алфафитных символов, псевдографика
 // и служебные символы не перекодируются
@@ -124,43 +137,43 @@ uint8_t row,col;      // текущее положение курсора стр
 uint8_t lcd_ram[32];  // буфер индикатора (модет использоваться при "мультипликации"
 
 
-// подпрограмма инициализации LCD индикатора
-void lcd_init(void)
-{
-  init_lcd_ports();
-//  register uint8_t cnt;
-  wait_ms(20);
-  wr_cmd(3);
-  wait_ms(5);
-  wr_cmd(3);
-  wait_ms(1);//100us
-  wr_cmd(3);
-  wait_ms(1);//40us
-  wr_cmd(2);
-  wait_ms(1);//40us
-  wr_cmd_byte(0x28);
-  wait_ms(1);
-  wr_cmd_byte(0x6);
-  wait_ms(1);
-  wr_cmd_byte(0xf);
-  wait_ms(1);
-  wr_cmd_byte(0x1);
-  wait_ms(2);
-  wr_cmd_byte(0x80);
-  wait_ms(1);
-// этот фрагмент можно активировать при необходимости что либо записать во
-// встроенный знакогенератор индикатора
-/*
-  wr_cmd_byte(0x40);
-  wait_ms(1);
-  for(cnt=0;cnt<24;cnt++)wr_dat_byte(mysymbols[cnt]);
-  wr_cmd_byte(0x80);
-  wait_ms(1);
-*/
-  row=col=0;
-
-}
-
+//// подпрограмма инициализации LCD индикатора
+//void Init_lcd(void)
+//{
+//  init_lcd_ports();
+////  register uint8_t cnt;
+//  wait_ms(20);
+//  wr_cmd(3);
+//  wait_ms(5);
+//  wr_cmd(3);
+//  wait_ms(1);//100us
+//  wr_cmd(3);
+//  wait_ms(1);//40us
+//  wr_cmd(2);
+//  wait_ms(1);//40us
+//  wr_cmd_byte(0x28);
+//  wait_ms(1);
+//  wr_cmd_byte(0x6);
+//  wait_ms(1);
+//  wr_cmd_byte(0xf);
+//  wait_ms(1);
+//  wr_cmd_byte(0x1);
+//  wait_ms(2);
+//  wr_cmd_byte(0x80);
+//  wait_ms(1);
+//// этот фрагмент можно активировать при необходимости что либо записать во
+//// встроенный знакогенератор индикатора
+///*
+//  wr_cmd_byte(0x40);
+//  wait_ms(1);
+//  for(cnt=0;cnt<24;cnt++)wr_dat_byte(mysymbols[cnt]);
+//  wr_cmd_byte(0x80);
+//  wait_ms(1);
+//*/
+//  row=col=0;
+//
+//}
+//
 // продпрограмма выключения мигающего курсора индикатора
 void lcd_cursor_off(void)
 {
@@ -257,7 +270,7 @@ int putchar__(int chr)
       clrscr();
     break;
   default:
-    put_chr(col,row,chr);
+    wr_lcd(chr);
     if(++col >= 16)
     {
       col=0;

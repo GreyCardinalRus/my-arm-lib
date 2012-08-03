@@ -19,7 +19,3 @@ extern void lcd_cursor_off(void);
 extern void lcd_cursor_on(void);
 #endif
 
-
-
-
-

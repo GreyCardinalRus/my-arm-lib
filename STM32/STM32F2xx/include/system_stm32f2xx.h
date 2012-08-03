@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    system_stm32f10x.h
+  * @file    system_stm32f2xx.h
   * @author  MCD Application Team
-  * @version V3.5.0
-  * @date    11-March-2011
+  * @version V1.0.0
+  * @date    18-April-2011
   * @brief   CMSIS Cortex-M3 Device Peripheral Access Layer System Header File.
-  ******************************************************************************
+  ******************************************************************************  
   * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -16,28 +16,28 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************
-  */
+  ******************************************************************************  
+  */ 
 
 /** @addtogroup CMSIS
   * @{
   */
 
-/** @addtogroup stm32f10x_system
+/** @addtogroup stm32f2xx_system
   * @{
   */  
   
 /**
   * @brief Define to prevent recursive inclusion
   */
-#ifndef __SYSTEM_STM32F10X_H
-#define __SYSTEM_STM32F10X_H
+#ifndef __SYSTEM_STM32F2XX_H
+#define __SYSTEM_STM32F2XX_H
 
 #ifdef __cplusplus
  extern "C" {
 #endif 
 
-/** @addtogroup STM32F10x_System_Includes
+/** @addtogroup STM32F2xx_System_Includes
   * @{
   */
 
@@ -46,17 +46,18 @@
   */
 
 
-/** @addtogroup STM32F10x_System_Exported_types
+/** @addtogroup STM32F2xx_System_Exported_types
   * @{
   */
 
 extern uint32_t SystemCoreClock;          /*!< System Clock Frequency (Core Clock) */
 
+
 /**
   * @}
   */
 
-/** @addtogroup STM32F10x_System_Exported_Constants
+/** @addtogroup STM32F2xx_System_Exported_Constants
   * @{
   */
 
@@ -64,7 +65,7 @@ extern uint32_t SystemCoreClock;          /*!< System Clock Frequency (Core Cloc
   * @}
   */
 
-/** @addtogroup STM32F10x_System_Exported_Macros
+/** @addtogroup STM32F2xx_System_Exported_Macros
   * @{
   */
 
@@ -72,7 +73,7 @@ extern uint32_t SystemCoreClock;          /*!< System Clock Frequency (Core Cloc
   * @}
   */
 
-/** @addtogroup STM32F10x_System_Exported_Functions
+/** @addtogroup STM32F2xx_System_Exported_Functions
   * @{
   */
   
@@ -86,7 +87,7 @@ extern void SystemCoreClockUpdate(void);
 }
 #endif
 
-#endif /*__SYSTEM_STM32F10X_H */
+#endif /*__SYSTEM_STM32F2XX_H */
 
 /**
   * @}
